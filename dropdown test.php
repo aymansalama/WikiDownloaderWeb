@@ -28,6 +28,7 @@
 </form>
 
 <?php
+/*
     $curl_handle=curl_init();
     curl_setopt($curl_handle, CURLOPT_URL,'https://dumps.wikimedia.org/backup-index.html');
     curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
@@ -48,16 +49,42 @@ $links = $dom->getElementsByTagName('a');
 foreach ($links as $link){
 	if(strstr($link->getAttribute('href'),"wiki/")){
    // echo $link->nodeValue.": : : :";
-    echo $link->getAttribute('href'), '<br><br>';
+   // echo $link->getAttribute('href'), '<br><br>';
     preg_match('/.+?(?=wiki)/', $link->getAttribute('href'), $output);
     $lang = implode("", $output);
     echo $lang;
-    echo "<br/><br/>";
+    echo "<br/>";
     $langarray[$count++]= $lang;
 }
 }
-echo $langarray[10];
-echo "done";
+//echo $langarray[10];
+echo "done"; */
+
+$datearray = array();
+$count = 0;
+
+$curl_handle=curl_init();
+    curl_setopt($curl_handle, CURLOPT_URL,'https://dumps.wikimedia.org/amwikiquote/');
+    curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Mozilla/5.0');
+    curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, false);
+    $query = curl_exec($curl_handle);
+    curl_close($curl_handle);
+
+    $dom = new DOMDocument;
+$dom->loadHTML($query);
+$links = $dom->getElementsByTagName('a');
+foreach ($links as $link){
+	$str = str_replace("/", "", $link->nodeValue);
+	if(is_numeric($str) || $str == "latest"){
+		echo $str."<br/>";
+		$datearray[$count++] = $str;
+	}
+}
+
+//echo $datearray[5];
 ?>
 
 
