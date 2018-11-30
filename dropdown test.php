@@ -40,15 +40,27 @@ curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, false);
  //   $query =  htmlentities($query);
   //  echo $query;
 
+$langarray[] = [];
+$count = 0;
 $dom = new DOMDocument;
 $dom->loadHTML($query);
 $links = $dom->getElementsByTagName('a');
 foreach ($links as $link){
-    echo $link->nodeValue.": : : :";
-    echo $link->getAttribute('href'), '<br>';
+	if(strstr($link->getAttribute('href'),"wiki/")){
+   // echo $link->nodeValue.": : : :";
+    echo $link->getAttribute('href'), '<br><br>';
+    preg_match('/.+?(?=wiki)/', $link->getAttribute('href'), $output);
+    $lang = implode("", $output);
+    echo $lang;
+    echo "<br/><br/>";
+    $langarray[$count++]= $lang;
 }
+}
+echo $langarray[10];
 echo "done";
-?> 
+?>
+
+
 
 </body>
 </html>
