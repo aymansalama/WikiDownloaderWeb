@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<h2>JavaScript TEST no12345654345654</h2>
+
+<p>ASDSADASDASDASDASDSADSADASDASDASDASD: FOR enwiki total 568 maybe</p>
+
+<p>Choose a wiki html file:</p>
+
+<input type="file" accept=".html" id="fileinput" onchange="clearDiv()">
+
+<p id="demo"></p>
+   
+<script type="text/javascript">
+	document.getElementById("demo").innerHTML = "";
+	
+	//var pattern = /[a-z-_0-9]*(?:\.xml\.gz-rss\.xml|\.xml\.gz|\.txt|\.xml\.bz2|\.xml\.7z|\.gz|\.txt\.bz2|\.json\.gz|\.sql\.gz)(?=")/g; 	Got txt file
+	var pattern = /[a-z-_0-9]*(?:\.txt|\.xml\.gz-rss\.xml|\.xml\.gz|\.xml\.bz2|\.xml\.7z|\.gz|\.txt\.bz2|\.json\.gz|\.sql\.gz|\.bz2-rss\.xml|\.sql\.gz-rss\.xml|\.gz-rss\.xml|\.xml-[a-z0-9]+\.bz2|\.xml[-a-z0-9]*\.bz2-rss\.xml|\.txt\.bz2-rss\.xml|\.json\.gz-rss\.xml)(?=")/g;
+	
+	function clearDiv(){
+		document.getElementById("demo").innerHTML = null;
+	}
+	
+	function readSingleFile(evt) {
+	
+                var f = evt.target.files[0];
+
+                if (f) {
+                    var r = new FileReader();
+                    r.onload = function (e) {
+                        var contents = e.target.result;
+						var result = contents.match(pattern);
+						console.log(result)
+						
+						if (result == null){
+							alert("No links found");
+						}else {
+							//print the links
+							for (var i = 0; i < result.length; i++){
+							
+								var a = document.createElement('a');
+								var linkText = document.createTextNode("Link " + i);
+								a.appendChild(linkText);
+								//URL LINK GO HERE
+								//a.href = "https://dumps.wikimedia.org/miwiki/20181201/" + result[i];
+								//a.href = "https://dumps.wikimedia.org/enwiki/latest/" + result[i];
+								a.href = "https://dumps.wikimedia.org/" + "enwiki/20181201/" + result[i];
+								document.getElementById("demo").innerHTML += (i+1) + " : <a href=\"" + a + "\">" + result[i] + "<\a><br />";
+								}
+						}
+                    }
+                    r.readAsText(f);
+                } else {
+                    alert("Failed to load file");
+                }
+            }
+
+    document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+	
+</script>
+
+<!-- All links in demo div -->
+<p id="demo"></p>
+
+</body>
+</html>
