@@ -36,29 +36,30 @@ body  {
     background-color: #b3ccff;
 }
 
-div.center {
-    text-align: center;
+.centered {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
 }
 
-button{
-  margin:auto;
-  display:block;
-}
+
+
 </style>
    <meta charset="UTF-8" />
    <title>WIKI DOWNLOADER WEB</title>
    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
+
 <header>
 <div class="center">
 <h1> WIKI DOWNLOADER WEB</h1>
 </div>
 </header>
 <body>
-   <div>
-      <div class="w3-container">
+      <div class="centered">
          <form action="/action_page.php">
              <select>
                <option> Choose Source </option>
