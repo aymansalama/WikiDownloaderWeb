@@ -1,106 +1,109 @@
-
-
 <!DOCTYPE html>
 <head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.w3-btn {width:150px;}
 
-	<style>
+div.center {
+text-align:center;
+}
+select {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  
+}
 
-	.w3-btn {width:150px;}
+submit {
+  width: 10%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
 
-	select {
-	  width: 100%;
-	  padding: 16px 20px;
-	  border: none;
-	  border-radius: 4px;
-	  background-color: #f1f1f1;
-	}
+date {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
 
-	submit {
-	  width: 10%;
-	  padding: 16px 20px;
-	  border: none;
-	  border-radius: 4px;
-	  background-color: #f1f1f1;
-	}
+body  {
 
-	date {
-	  width: 10%;
-	  padding: 16px 20px;
-	  border: none;
-	  border-radius: 4px;
-	  background-color: #f1f1f1;
-	}
+    background-color: #b3ccff;
+}
 
-	body  {
-
-	    background-color: #b3ccff;
-	}
-
-	.centered {
-	  position: fixed;
-	  top: 30%;
-	  left: 50%;
-	  margin-top: -50px;
-	  margin-left: -100px;
-	}
+.centered {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
 
 
+</style>
 
-	</style>
-
-<meta charset="UTF-8" />
-<title>WIKI DOWNLOADER WEB</title>
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="styles.css">
-   
+   <meta charset="UTF-8" />
+   <title>Calender</title>
+   <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <header>
-
 	<div class="center">
-		<h1 style="font-family:Impact;"> WIKI DOWNLOADER WEB</h1>
+		<h1 style="font-family:Impact;"> WIKI DOWNLOADER WEB </h1>
 	</div>
-
 </header>
 
 <body>
-      <div class="centered">
-         <form action="/action_page.php">
-	 
-	 <p align="center">Choose Source</p>
-             <select>
-               <option>  </option>
-	       <option>Wikipedia</option>
-               <option>MediaWiki</option>
-            </select>
-	    
-	    <br><br>
-	    
-	    <p align="center">Choose Languange</p>
-            <select>
-               <option>  </option>
-               <option>English</option>
-	    </select>
-	   
-	   <br>
-	   
-	   <p align="center">Choose Date</p>
-           <date><input type="date" name="date"></date>
-	  
-	  <br><br><br>
-		
-          <submit><input type="submit" value="Submit"></submit>
-	  
-	  <submit><input type="reset"></submit>
-	  
-         </form>
-	 
-      </div> 
-      
-</body>
 
+<div class="centered">
+	<form action="/action_page.php">
+      
+		<p align="center">Choose Source</p>
+		
+		     <select>
+			<option> </option>
+			<option>Wikipedia </option>
+		       <option>MediaWiki </option>
+		     </select>
+
+<br>
+
+		<p align="center">Choose Languange</p>
+		
+		    <select>
+		       <option> </option>
+		       <option>English</option>
+		    </select>
+<br>
+		<p align="center">Choose Date</p>
+		
+		  	<date>
+		     	<input type="date" name="date">
+			</date>
+
+          
+<br><br><br>
+
+
+		
+		<submit>
+			<input type="submit" name="submit" value="Submit">
+		</submit>
+
+		<submit>
+			<input type="reset">
+		</submit>
+
+         </form>
+      </div>
+</body>
 </html>
+
