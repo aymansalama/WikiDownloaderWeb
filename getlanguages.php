@@ -1,9 +1,9 @@
  <?php
 
-    $source = $_POST[source];
+    $source = $_POST[source];	//source selected by user
 
     $curl_handle=curl_init();
-    curl_setopt($curl_handle, CURLOPT_URL,'https://dumps.wikimedia.org/backup-index.html');
+    curl_setopt($curl_handle, CURLOPT_URL,'https://dumps.wikimedia.org/backup-index.html');		//get html source from url
     curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
     curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Mozilla/5.0');
@@ -11,29 +11,28 @@
     curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, false);
     $query = curl_exec($curl_handle);
     curl_close($curl_handle);
-	//$query =  htmlentities($query);
-	// echo $query;
 
 	$langarray[] = [];
 	$count = 0;
+
+	//look for elements with tag <a> containing links in the html
 	$dom = new DOMDocument;
 	$dom->loadHTML($query);
 	$links = $dom->getElementsByTagName('a');
+
+	//for eack link found in the html
 	foreach ($links as $link){
+		//if the link contains an occurrence of the source selected by the user
 		if(strstr($link->getAttribute('href'), $source)){
-	   // echo $link->nodeValue.": : : :";
-	   // echo $link->getAttribute('href'), '<br><br>';
-		$matchstr = '/.+?(?='.$source.')/';
-		preg_match($matchstr, $link->getAttribute('href'), $output);
-		$lang = implode("", $output);
-	   // echo $lang;
-	  //  echo "<br/>";
-		$langarray[$count++]= $lang;
-		//echo"<option value=".$lang.">".$lang."</option>";
+			//extract the language code from the link
+			$matchstr = '/.+?(?='.$source.')/';
+			preg_match($matchstr, $link->getAttribute('href'), $output);
+			$lang = implode("", $output);
+			//insert the language code found into an array
+			$langarray[$count++]= $lang;
+		}
 	}
-	}
-	//echo $langarray[10];
-	//echo "done";
+	
 
 /*Get Language & Code from meta wikimedia*/
 	//echo '<br/>';
