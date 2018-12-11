@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+	<title>Wiki Web Downloader</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<style>
+		body {font-family: "Raleway", Arial, sans-serif}
+		.w3-row img {margin-bottom: -8px}
+		column {
+		  float: left;
+		  width: 33.33%;
+		  padding: 30px;
+		}
+		.centered {
+		  position: fixed;
+		  top: 28%;
+		  left: 18%;
+		  margin-top: -50px;
+		  margin-left: -80px;
+		}
+		.input-hidden {
+		  position: absolute;
+		  left: -9999px;
+		}
+		input[type=radio]:checked + label>img {
+		  border: 1px solid #000000;
+		  box-shadow: 0 0 3px 3px #000000;
+		}
+		select {
+		  width: 90%;
+		  padding: 16px 20px;
+		  border: none;
+		  border-radius: 4px;
+		  color: black;
+		  background-color: #f1f1f1;
+		}
+		submit {
+		  width: 70%;
+		  border: none;
+		  color: black;
+		  background-color: #f1f1f1;
+		}
+	</style>
+
+	<script type="text/javascript">
+		//function to get the languages available for the source selected by the user
+		//executed every time user changes the dropdown selection for date
+		$(document).ready(function(){
+			$('input[type=radio][name=sources]').change(function(){
+				var source = this.value;
+				console.log(source);
+				$.ajax({
+					type:"post",
+					url:"getlanguages.php",
+					data: "source=" + source,
+					success: function(data){
+						$("#languages").html(data);
+					} 
+				});
+			});
+		});
+
+		//function to get the dates available for the selected source and language
+		//executed everytime user changes the dropdown selection for language
+		$(document).ready(function(){
+			$("#languages").change(function(){
+				var language = $("#languages").val();
+				var source = $('input[type=radio][name=sources]:checked').val();
+				var langsource = language + source;
+				console.log(source);
+				console.log(langsource);
+				$.ajax({
+					type:"post",
+					url:"getdates.php",
+					data: "langsource=" + langsource,
+					success: function(data){
+						$("#dates").html(data);
+					} 
+				});
+			});
+		});
+		
+		function urlFunction() {
+			var SourceUrl = "https://dumps.wikimedia.org/";
+			var language = $("#languages").val();
+			var source = $('input[type=radio][name=sources]:checked').val();
+			var langsource = language + source;
+			var landingUrl = $("#dates").val();
+			var finalUrl = SourceUrl + langsource + "/" + landingUrl + "/";
+			
+			console.log(finalUrl);
+				$.ajax({
+					type:"post",
+					url:"get_download_link.php",
+					data: "finalUrl=" + finalUrl,
+					success: function(data){
+						$("#about").html(data);
+					} 
+				});
+			
+			
+		}
+		
+		/*
+		var SourceUrl = "https://dumps.wikimedia.org/";
+		var queryUrl = "";
+		var landingUrl = "";
+		var source = "";
+		var langsource = "";
+		$(function() {
+			
+			 $('#languages').on('change', function(){
+				if($(this).val() == 0){
+					queryUrl = "";
+				}else{
+					queryUrl = $(this).val();
+					source = $('input[type=radio][name=sources]:checked').val();
+					langsource = queryUrl + source;
+				}
+				MakeUrl();
+				return false;
+			 });
+			 
+			 $('#dates').on('change', function(){
+				if($(this).val() == 0){
+					landingUrl = "";
+				}else{
+					landingUrl = $(this).val();
+				}
+				MakeUrl();
+				return false;
+			 });
+		});
+		
+		function MakeUrl(){
+			var finalUrl = SourceUrl + langsource + "/" + landingUrl + "/";
+			$('#urlBox').val(finalUrl);
+		} */
+		
+		//action="get_download_link.php" 
+	</script>
+	
+	<body>
+
+		<!-- !PAGE CONTENT! -->
+		<div class="w3-content" style="max-width:1500px">
+
+			<!-- Header -->
+			<header class="w3-container w3-xlarge w3-padding-24">
+				<h1 style="font-family:Brush Script Std" align="center"> Wiki Web Downloader</h1>
+			</header>
+
+			<div class="w3-row" style="padding: 0 20px 10px 20px">
+				<form id="form" method="post">
+				
+					<div class="row" style="padding-top:30px">
+						<div class="col-sm-4" align="center" style="font-family:Impact; font-size:140%">Choose Source</div>
+						<div class="col-sm-3" align="center" style="font-family:Impact; font-size:140%">Choose Language</div>
+						<div class="col-sm-3" align="center" style="font-family:Impact; font-size:140%">Choose Date</div> 
+						<div class="col-sm-2"></div> 
+					</div>
+					
+					<div class="row"style="padding-top:30px">
+						<div class="col-sm-4">
+							<div class="col-sm-4" align="center" style="padding-right:10px">
+								<input type="radio" name="sources" id="wiki" value="wiki" class="input-hidden"/>
+								<label for="wiki">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1200px-Wikipedia-logo-v2-en.svg.png" width="150" height="150">
+								</label>
+							</div>
+							
+							<div class="col-sm-4" align="center" style="padding-right:10px">
+								<input type="radio" name="sources" id="wikimedia" value="wikimedia" class="input-hidden"/>
+								<label for="wikimedia">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Wikimedia_Foundation_logo_-_vertical_%282012-2016%29.svg" width="150" height="150">
+								</label>
+							</div>
+							
+							<div class="col-sm-4" align="center">
+								<input type="radio" name="sources" id="wiktionary" value="wiktionary" class="input-hidden"/>
+								<label for="wiktionary">
+									<img src="https://upload.wikimedia.org/wikipedia/meta/7/77/Wiktprintable.svg" width="150" height="150">
+								</label>
+							</div>	
+						</div>
+						
+						<div class="col-sm-3" align="center">
+							<select name="languages" id="languages">
+								<option selected disabled>-select language-</option>
+							</select>
+						</div>
+						
+						<div class="col-sm-3" align="center">
+							<select name="dates" id="dates">
+								<option selected disabled>-select date-</option>
+							</select>
+						</div>
+						
+						<div class="col-sm-2" align="center">
+							<submit>
+								<input type="button" name="submit" onclick="urlFunction()" value="Submit">
+							</submit>
+						</div>
+					 </div>
+					 
+					 <div class="row" style="padding-top:30px">
+						<div class="col-sm-4">
+							<div class="col-sm-4" align="center">
+								<input type="radio" name="sources" id="wikisource" value="wikisource" class="input-hidden"/>
+								<label for="wikisource">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Wikisource-logo-fr-en.svg" width="150" height="150">
+								</label>
+							</div>
+							
+							<div class="col-sm-4" align="center">
+								<input type="radio" name="sources" id="wikinews" value="wikinews" class="input-hidden"/>
+								<label for="wikinews">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/WikiNews-Logo-en.svg/200px-WikiNews-Logo-en.svg.png" width="150" height="150">
+								</label>
+							</div>
+							
+							<div class="col-sm-4" align="center">
+								<input type="radio" name="sources" id="wikiquote" value="wikiquote" class="input-hidden"/>
+								<label for="wikiquote">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Wikiquote-logo-en.svg" width="150" height="150">
+								</label>
+							</div>	
+						</div>
+						
+						<div class="col-sm-3" align="center"></div>
+						
+						<div class="col-sm-3" align="center"></div>
+						
+						<div class="col-sm-2" align="center"></div>
+					</div>
+					
+					<div class="row" style="padding-top:30px">
+						<div class="col-sm-4">
+							<div class="col-sm-4" align="center">
+								<input type="radio" name="sources" id="wikibooks" value="wikibooks" class="input-hidden"/>
+								<label for="wikibooks">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Wikibooks-logo-en-noslogan.svg" width="150" height="150">
+								</label>
+							</div>
+							
+							<div class="col-sm-4" align="center">
+								<input type="radio" name="sources" id="wikiversity" value="wikiversity" class="input-hidden"/>
+								<label for="wikiversity">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Wikiversity-logo-en.svg" width="150" height="150">
+								</label>
+							</div>
+							
+							<div class="col-sm-4" align="center">
+								<input type="radio" name="sources" id="wikivoyage" value="wikivoyage" class="input-hidden"/>
+								<label for="wikivoyage">
+									<img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Wikivoyage-Logo-v3-en.svg" width="150" height="150">
+								</label>
+							</div>	
+						</div>
+						
+						<div class="col-sm-3" align="center"></div>
+						
+						<div class="col-sm-3" align="center"></div>
+						
+						<div class="col-sm-2" align="center"></div>
+					</div>
+				</form>
+			</div>
+		  
+			<!-- End Page Content -->
+		</div>
+
+		<!-- Footer / About Section -->
+		<footer class="w3-light-grey w3-padding-64 w3-center" id="about">
+			
+		</footer>
+	 
+	</body>
+</html>
