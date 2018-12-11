@@ -48,6 +48,13 @@
 				<option>-select source-</option>
 				<option value="wiki">Wikipedia</option>
 				<option value="wikimedia">Wikimedia</option>
+				<option value="wikitionary">Wikitionary</option>
+				<option value="wikisource">Wikisource</option>
+				<option value="wikinews">Wikinews</option>
+				<option value="wikiquote">Wikiquote</option>
+				<option value="wikibooks">Wikibooks</option>
+				<option value="wikiversity">Wikiversity</option>
+				<option value="wikivoyage">Wikivoyage</option>
 			</select>
 				
 			<br><br>
