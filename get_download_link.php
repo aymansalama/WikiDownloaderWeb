@@ -4,8 +4,8 @@
 
 <?php
 
-$fromQuery = '';
-$url = 'https://dumps.wikimedia.org/'.'enwiki/latest/';
+$fromQuery = 'viwiki/latest/';
+$url = 'https://dumps.wikimedia.org/'.$fromQuery;
 echo $url;
 echo "<br/>";
 
@@ -41,17 +41,19 @@ foreach ($tags as $tag) {
     $cloned = $tag->cloneNode(TRUE);
     $newdoc->appendChild($newdoc->importNode($cloned,TRUE));
 	
-	$re = '/[a-z-_0-9]*(?:\.txt|\.xml\.gz-rss\.xml|\.xml\.gz|\.xml\.bz2|\.xml\.7z|\.gz|\.txt\.bz2|\.json\.gz|\.sql\.gz|\.bz2-rss\.xml|\.sql\.gz-rss\.xml|\.gz-rss\.xml|\.xml-[a-z0-9]+\.bz2|\.xml[-a-z0-9]*\.bz2-rss\.xml|\.txt\.bz2-rss\.xml|\.json\.gz-rss\.xml)(?=")/';
+	$re = '/[a-z-_0-9]*(?:\.xml\.7z-rss\.xml|\.txt|\.xml\.gz-rss\.xml|\.xml\.gz|\.xml\.bz2|\.xml\.7z|\.gz|\.txt\.bz2|\.json\.gz|\.sql\.gz|\.bz2-rss\.xml|\.sql\.gz-rss\.xml|\.gz-rss\.xml|\.xml-[a-z0-9]+\.bz2|\.xml[-a-z0-9]*\.bz2-rss\.xml|\.txt\.bz2-rss\.xml|\.json\.gz-rss\.xml)(?=")/';
 	
 	preg_match($re, $newdoc->saveHTML(), $matches, PREG_OFFSET_CAPTURE, 0);
 	
 	//var_dump($matches);
+	
 	if(empty($matches)){}
 	else{
 		
 		foreach ($matches as $match) {
 		echo ('<a href="'.$url.$match[0].'">'.$match[0].'</a>');
 		}
+		echo "<br/>";
 		$counter++;
 	}
 	
@@ -61,8 +63,7 @@ foreach ($tags as $tag) {
     $newdoc->appendChild($newdoc->importNode($cloned,TRUE));
     echo $newdoc->saveHTML();
 	*/
-	
-	echo "<br/>";
+
 }
 
 echo $counter;
