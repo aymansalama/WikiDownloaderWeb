@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 .w3-btn {width:150px;}
-
 div.center {
 text-align:center;
 }
@@ -12,53 +11,45 @@ text-align:center;
 * {
   box-sizing: border-box;
 }
-
 .column {
   float: left;
   width: 33.33%;
   padding: 30px;
-
   
 }
 	
 select {
-  width: 100%;
-  padding: 16px 20px;
+  width: 130%;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   background-color: #f1f1f1;
   
 }
-
 submit {
   width: 30%;
-  padding: 16px 20px;
+  padding: 16px 16px;
   border: none;
   border-radius: 4px;
   background-color: #f1f1f1;
 }
-
 date {
   width: 60%;
-  padding: 16px 20px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   background-color: #f1f1f1;
 }
-
 body  {
-
     background-color: #b3ccff;
 }
-
 .centered {
   position: fixed;
   top: 28%;
-  left: 18%;
+  left: 23%;
   margin-top: -50px;
   margin-left: -80px;
 }
-
 .position {
   position: fixed;
   top: 70%;
@@ -66,21 +57,18 @@ body  {
   margin-top: -0px;
   margin-left: -70px;
 }
-
 .input-hidden {
   position: absolute;
   left: -9999px;
 }
-
 input[type=radio]:checked + label>img {
   border: 1px solid #fff;
   box-shadow: 0 0 3px 3px #090;
 }
-
 </style>
 
    <meta charset="UTF-8" />
-   <title>WIKI DOWNLOADER WEB</title>
+   <title>WIKI WEB DOWNLOADER</title>
    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -96,26 +84,76 @@ input[type=radio]:checked + label>img {
 <div class="centered">
 	<form action="/action_page.php">
       		 <div class="column"> 
-		 	<p align="center" style="font-family:Impact; font-size:140%;">Choose Source
+		 	<h3 align="center" style="font-family:Impact; font-size:140%;">Choose Source
+<br>
 		
 		 		<input type="radio" name="wiki" id="wikipedia" class="input-hidden"/>
 			 
 				<label for="wikipedia">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1200px-Wikipedia-logo-v2-en.svg.png" width="150" height="150">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1200px-Wikipedia-logo-v2-en.svg.png" width="80" height="80">
 		 		</label>
 
 			 
-				<input type="radio" name="wiki" id="wikidata" class="input-hidden"/>
+				<input type="radio" name="wiki" id="wikimedia" class="input-hidden"/>
 			 
-				<label for="wikidata">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Wikidata_barcode.svg" width="150" height="150">
+				<label for="wikimedia">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Wikimedia-logo-meta.svg/1024px-Wikimedia-logo-meta.svg.png" width="80" height="80">
 				</label>
-			</p>
+<br>
+				
+				<input type="radio" name="wiki" id="wiktionary" class="input-hidden"/>
+			 
+				<label for="wiktionary">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/WiktionaryEn_-_DP_Derivative.svg/1200px-WiktionaryEn_-_DP_Derivative.svg.png" width="80" height="80">
+				</label>
+
+
+				<input type="radio" name="wiki" id="wikisource" class="input-hidden"/>
+			 
+				<label for="wikisource">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Wikisource-logo-v3.png" width="80" height="80">
+				</label>
+<br>
+
+				<input type="radio" name="wiki" id="wikinews" class="input-hidden"/>
+			 
+				<label for="wikinews">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/WikiNews-Logo-en.svg/1200px-WikiNews-Logo-en.svg.png" width="80" height="80">
+				</label>
+
+
+				<input type="radio" name="wiki" id="wikiquotes" class="input-hidden"/>
+			 
+				<label for="wikiquotes">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Wikiquote-logo-en.svg/2000px-Wikiquote-logo-en.svg.png" width="80" height="80">
+				</label>
+
+<br>
+				<input type="radio" name="wiki" id="wikibooks" class="input-hidden"/>
+			 
+				<label for="wikibooks">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Wikibooks-logo-en.svg/1200px-Wikibooks-logo-en.svg.png" width="80" height="80">
+				</label>
+
+
+				<input type="radio" name="wiki" id="wikiversity" class="input-hidden"/>
+			 
+				<label for="wikiversity">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Wikiversity-logo-en.svg/1200px-Wikiversity-logo-en.svg.png" width="80" height="80">
+				</label>
+
+<br>
+				<input type="radio" name="wiki" id="wikivoyage" class="input-hidden"/>
+			 
+				<label for="wikivoyage">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Wikivoyage-Logo-v3-en.svg/1200px-Wikivoyage-Logo-v3-en.svg.png" width="80" height="80">
+				</label>
+			</h3>
 		</div>
 
 
 <div class="column">
-	<p align="center" style="font-family:Impact; font-size:140%">Choose Date</p>
+	<h3 align="center" style="font-family:Impact; font-size:140%">Choose Date</h3>
 
         <date>
              <input type="month" name="date">
@@ -125,13 +163,13 @@ input[type=radio]:checked + label>img {
           
 
 <div class="column">
-	<p align="center" style="font-family:Impact; font-size:140%">Choose Language</p>
+	<h3 align="center" style="font-family:Impact; font-size:140%">Choose Language
 
             <select>
                <option> </option>
                <option>ENGLISH</option>
             </select>
-
+	</h3>
 </div>
 
 
@@ -149,4 +187,3 @@ input[type=radio]:checked + label>img {
 </div>
 </body>
 </html>
-
