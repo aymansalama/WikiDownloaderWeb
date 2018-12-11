@@ -8,6 +8,19 @@
 div.center {
 text-align:center;
 }
+	
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 30px;
+
+  
+}
+	
 select {
   width: 100%;
   padding: 16px 20px;
@@ -18,7 +31,7 @@ select {
 }
 
 submit {
-  width: 10%;
+  width: 30%;
   padding: 16px 20px;
   border: none;
   border-radius: 4px;
@@ -26,7 +39,7 @@ submit {
 }
 
 date {
-  width: 100%;
+  width: 60%;
   padding: 16px 20px;
   border: none;
   border-radius: 4px;
@@ -40,17 +53,34 @@ body  {
 
 .centered {
   position: fixed;
-  top: 30%;
-  left: 48%;
+  top: 28%;
+  left: 23%;
   margin-top: -50px;
-  margin-left: -100px;
+  margin-left: -80px;
 }
 
+.position {
+  position: fixed;
+  top: 70%;
+  left:70%;
+  margin-top: -0px;
+  margin-left: -70px;
+}
+
+.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
 
 </style>
 
    <meta charset="UTF-8" />
-   <title>Calender</title>
+   <title>WIKI WEB DOWNLOADER</title>
    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -65,35 +95,47 @@ body  {
 
 <div class="centered">
 	<form action="/action_page.php">
-      
-		<p align="center" style="font-family:Impact; font-size:140%;">Choose Source</p>
+      		 <div class="column"> 
+		 	<p align="center" style="font-family:Impact; font-size:140%;">Choose Source</p>
 		
-		     <select>
-			<option> </option>
-			<option>WIKIPEDIA </option>
-		       <option>WIKIDATA </option>
-		     </select>
+		 		<input type="radio" name="wikipedia" id="wikipedia" class="input-hidden"/>
+			 
+				<label for="wikipedia">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1200px-Wikipedia-logo-v2-en.svg.png" width="150" height="150">
+		 		</label>
 
-<br>
+			 
+				<input type="radio" name="wikidata" id="wikidata" class="input-hidden"/>
+			 
+				<label for="wikidata">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Wikidata_barcode.svg" width="150" height="150">
+				</label>
+			</p>
+		</div>
 
-		<p align="center" style="font-family:Impact; font-size:140%;">Choose Language</p>
-		
-		    <select>
-		       <option> </option>
-		       <option>ENGLISH</option>
-		    </select>
-<br>
-		<p align="center" style="font-family:Impact; font-size:140%;">Choose Date</p>
-		
-		  	<date>
-		     	<input type="month" name="date">
-			</date>
 
+<div class="column">
+	<p align="center" style="font-family:Impact; font-size:140%">Choose Date</p>
+
+        <date>
+             <input type="month" name="date">
+        </date>
+
+</div>
           
-<br><br><br>
+
+<div class="column">
+	<p align="center" style="font-family:Impact; font-size:140%">Choose Language</p>
+
+            <select>
+               <option> </option>
+               <option>ENGLISH</option>
+            </select>
+
+</div>
 
 
-		
+<div class="position">		
 		<submit>
 			<input type="submit" name="submit" value="Submit">
 		</submit>
@@ -104,6 +146,7 @@ body  {
 
          </form>
       </div>
+</div>
 </body>
 </html>
 
