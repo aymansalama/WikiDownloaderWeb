@@ -101,7 +101,7 @@
 	
 	foreach($results as $result){
 		for($i=0; $i<$count2D; $i++){
-			if($result == $langArray[$i][0]){
+			if($result == $langArray[$i][0]){			
 				echo"<option value=".$langArray[$i][0].">".$langArray[$i][1]."</option>";
 			}
 		}
