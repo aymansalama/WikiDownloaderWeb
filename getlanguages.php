@@ -56,7 +56,7 @@
 	$dom->loadHTML($query);
 	$tags = $dom->getElementsByTagName('tr');
 	
-	//
+	//get the langauge between code and 'ltr'/'rtl'
 	function get_string_between($string, $start, $end){
 		$string = ' ' . $string;
 		$ini = strpos($string, $start);
