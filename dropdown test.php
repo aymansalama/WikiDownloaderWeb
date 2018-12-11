@@ -39,46 +39,6 @@
 					});
 				});
 			});
-			
-			//source link to wikimedia dump files
-			var SourceUrl = "https://dumps.wikimedia.org/";
-			var queryUrl = "";
-			var landingUrl = "";
-			var source = "";
-			var langsource = "";
-			
-			$(function() {
-				 
-				 //insertt selected langauge to URL
-				 $('#languages').on('change', function(){
-					if($(this).val() == 0){
-						queryUrl = "";
-					}else{
-						queryUrl = $(this).val();
-						source = $("#sources").val();
-						langsource = queryUrl + source;
-					}
-					MakeUrl();
-					return false;
-				 });
-				 
-				 //insert selected date to URL
-				 $('#dates').on('change', function(){
-					if($(this).val() == 0){
-						landingUrl = "";
-					}else{
-						landingUrl = $(this).val();
-					}
-					MakeUrl();
-					return false;
-				 });
-			});
-			
-			//make a URL with source, language and date
-			function MakeUrl(){
-				var finalUrl = SourceUrl + langsource + "/" + landingUrl + "/";
-			}
-			
 		</script>
 	</head>
 
