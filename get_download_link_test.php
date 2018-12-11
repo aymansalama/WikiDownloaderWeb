@@ -1,19 +1,20 @@
 <?php
-$url="https://dumps.wikimedia.org/viwiki/latest/";
-$counter = -1;
-$data=file_get_contents($url);
-$data = strip_tags($data,"<a>");
-$d = preg_split("/<\/a>/",$data);
-foreach ( $d as $k=>$u ){
-    if( strpos($u, "<a href=") !== FALSE ){
-		$counter++;
-        $u = preg_replace("/.*<a\s+href=\"/sm","",$u);
-        $u = preg_replace("/\".*/","",$u);
-        echo ($u."\n");
-		
-    }
+//change the url here
+$url = "https://dumps.wikimedia.org/enwiki/latest/";
+$html = file_get_contents($url);
+$counter=-1;
+$doc = new DOMDocument();
+$doc->loadHTML($html); //helps if html is well formed and has proper use of html entities!
+
+$xpath = new DOMXpath($doc);
+
+$nodes = $xpath->query('//a');
+
+foreach($nodes as $node) {
+	$counter++;
+    echo($node->getAttribute('href'));
 	echo "<br/>";
 }
-
 echo $counter;
+
 ?>
