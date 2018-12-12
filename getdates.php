@@ -20,7 +20,6 @@
 	$links = $dom->getElementsByTagName('a');
 	
 	echo "<option value = 0 selected disabled>-select a date-</option>";
-	echo "<option value = 1>-select a date-</option>";
 	
 	//for eack link found in the html
 	foreach ($links as $link){
