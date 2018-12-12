@@ -4,33 +4,24 @@
 		#urlBox2 {
 			width:500px;
 		}
+		input[type=checkbox]
+		{
+		  /* Double-sized Checkboxes */
+		  -ms-transform: scale(2); /* IE */
+		  -moz-transform: scale(2); /* FF */
+		  -webkit-transform: scale(2); /* Safari and Chrome */
+		  -o-transform: scale(2); /* Opera */
+		  padding: 50px;
+		  margin: 15px;
+		}
+		input[type=submit]
+		{
+		  margin: 50px;
+		}
 	</style>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script>	
-			/*$(".match_values").on("submit", function() {console.log('fzef');
-				var values = [];
-				$('.match_values:checked').each(function() {
-					var result = $(this).val();
-					values.push(result);
-				});
-				var link = $(".link").attr('href', 'https://dumps.wikimedia.org/enwiki/latest/' + values);
-				console.log(link);
-			});
-
-			// Init link on page load
-			$(".match_values").trigger("submit");
-			
-			function initialUrl(){
-					var link = $(url).val();
-					$('#urlBox').val(link);
-				}
-			
-
-			if(document.getElementById('checked').checked){
-			document.getElementById('unchecked').disabled = true;
-			}*/
-			
 			$(document).ready(function(){
 				var x = document.getElementById("check");
 				if (x.style.display === "none") {
@@ -51,7 +42,6 @@
 		<?php
 
 			$url= $_POST['finalUrl'];
-			echo $url;
 
 			$curl_handle=curl_init();
 			curl_setopt($curl_handle, CURLOPT_URL,$url);
@@ -67,6 +57,9 @@
 			$tags = $dom->getElementsByTagName('a');
 
 			$counter = 0;
+			
+			echo('<b style="font-size: 50px">List Of Files</b></br></br>');
+			echo('<input type="checkbox" style="margin-left:5px" onClick="toggle(this)" /> Select All<br/>');
 
 			//Checker for domElement
 			foreach ($tags as $tag) {
@@ -81,10 +74,10 @@
 			
 				if(empty($matches)){}
 				else{
-				
+					
 					foreach ($matches as $match) {
 					
-						echo('<form action="pass_link_to_zip.php" method="post"><input id= "checked" type="checkbox" name="match_values[]" value="'.$match[0].'">'.$match[0].'<br>');
+						echo('<form action="pass_link_to_zip.php" method="post"><input id= "checked" type="checkbox" name="link" value="'.$match[0].'"> '.$match[0].'<br>');
 					
 					}
 				
@@ -97,8 +90,7 @@
 				echo ('<input type="text" value="'.$url.'" id="urlBox2" name="urlBox2" readonly />');
 			}
 
-			echo('<input type="submit" name="submit" value="Submit" /></form>');
-			echo $counter;
+			echo('<input type="submit" name="Download" value="Download" /></form>');
 
 		?>
 
