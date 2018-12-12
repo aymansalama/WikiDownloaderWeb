@@ -71,8 +71,8 @@
 	<?php
 
 			//get appended URL from user selection
-			//$url= $_POST['finalUrl'];
-			$url = 'https://dumps.wikimedia.org/nowiki/20181020/'; 
+			$url= $_POST['finalUrl'];
+			//$url = 'https://dumps.wikimedia.org/nowiki/20181020/'; 
 			
 			$curl_handle=curl_init();
 			curl_setopt($curl_handle, CURLOPT_URL,$url);
