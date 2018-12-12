@@ -107,7 +107,7 @@ foreach ($tags as $tag) {
 		
 		foreach ($matches as $match) {
 		
-		echo('<form action="pass_link_to_zip.php" method="post"><input id= "checked" type="checkbox" name="match_values[]" value="'.$match[0].'">'.$match[0].'<br>');
+		echo('<form action="download_link_2.php" method="post"><input id= "checked" type="checkbox" name="match_values[]" value="'.$match[0].'">'.$match[0].'<br>');
 		
 		}
 		
