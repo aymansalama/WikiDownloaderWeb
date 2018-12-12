@@ -4,9 +4,9 @@
 <?php
 
 $arrayUrl = array('https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-abstract2.xml.gz',
-'https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-abstract3.xml.gz',
-'https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-abstract6.xml.gz',
-'https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-templatelinks.sql.gz');  
+'https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-abstract3.xml.gz');  
+//'https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-abstract6.xml.gz');  
+//'https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-templatelinks.sql.gz');  
 //'https://dumps.wikimedia.org/jawiki/20181201/jawiki-20181201-stub-meta-history6.xml.gz');
 
 //filesize array is correspnding to the arrayUrl array
@@ -27,7 +27,16 @@ $zipname = "file.zip";
 			$zip->addFile($file);
 	}
 	
-	$zip->close();
+$zip->close();
+
+header('Content-Type: application/zip');
+header('Content-Length: ' . filesize($tmp_file));
+header('Content-Disposition: attachment; filename=\''.$zipname.'\'');
+ob_clean();
+flush();
+readfile($tmp_file);
+
+	
 
 /*------------------------------------Functions-----------------------------------------*/
 
@@ -100,7 +109,7 @@ function get_download_content($url, $number, $size1){
 
 ?>
 
-<a href="file.zip" download>Download link here</a>
+<!--<a href="file.zip" download>Download link here</a>-->
 
 </body>
 </html>

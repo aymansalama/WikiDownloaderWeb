@@ -11,8 +11,9 @@
 <?php
 
 session_start();
-$url = 'https://dumps.wikimedia.org/brwiki/20180720/';
+$url = 'https://dumps.wikimedia.org/nowiki/20181201/';
 echo $url;
+
 
 $curl_handle=curl_init();
 curl_setopt($curl_handle, CURLOPT_URL,$url);
@@ -50,7 +51,7 @@ foreach ($tags as $tag) {
 		
 		foreach ($matches as $match) {
 		
-		echo('<form action="get_file_size.php" method="post"><input id= "checked" type="checkbox" name="match_values[]" value="'.$match[0].'">'.$match[0].'<br>');
+		echo('<form action="pass_link_to_zip_test.php" method="post"><input id= "checked" type="checkbox" name="match_values[]" value="'.$match[0].'">'.$match[0].'<br>');
 		//echo ('<a href="'.$url.$match[0].'">'.$match[0].'</a><br>');
 		}
 		
@@ -67,7 +68,7 @@ foreach ($tags_2 as $tag_2) {
 	$re_2 = '/(?:\d+|\d*\.\d+)\s+(?:GB|MB|KB|bytes)/';
 	preg_match($re_2, $newdoc->saveHTML(), $matches_2, PREG_OFFSET_CAPTURE, 0);
 	
-	$a = array();
+	//$a = array();
 	if(!empty($matches_2)){
 	foreach ($matches_2 as $match_2){
 			//echo $match_2[0];
@@ -80,6 +81,7 @@ foreach ($tags_2 as $tag_2) {
 }
 
 
+echo('<input type="hidden" name="url" value="'.$url.'">');
 echo('<input type="submit" name="submit" value="Submit" /></form>');
 echo $counter;
 echo $counter_2;

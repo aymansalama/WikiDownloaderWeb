@@ -3,12 +3,42 @@
 <body>
 <?php
 
-$url = $_POST['urlBox2'];
-$sizeArray = array();
+$url = $_POST['url'];
+$sizeArray = array(0,0);
 $selectedArray = array();
 $fileArray = array();
 
+
 if(isset($_POST['submit'])){
+	if(!empty($_POST['match_values_2'])){
+		foreach($_POST['match_values_2'] as $filearray){
+		
+			$single = explode(",",$filearray);
+			foreach($single as $item){
+				$array[] = explode(" ",$item);
+			}
+		}
+		//print_r($array);
+		
+		foreach ($array as $arr){
+			if($arr[1] === 'GB'){
+				$size = (int)$arr[0]*1024;
+				//print_r($size);
+			}
+			if($arr[1] === 'KB'){
+				$size = (int)$arr[0]/1024;
+			}
+			if($arr[1] === 'Bytes'){
+				$size = (int)$arr[0]/1024/1024;
+			}
+			if($arr[1] === 'MB'){
+				$size = (int)$arr[0];
+			}
+			array_push($sizeArray,$size);
+		}
+	}
+
+	
 	if(!empty($_POST['match_values'])){
 		for($i = 0; $i < count($_POST['match_values']); $i++){
 			$selected = $_POST['match_values'][$i];
@@ -20,10 +50,10 @@ if(isset($_POST['submit'])){
 	}
 }
 
-
+ 
 //Zip files
 $t = time();
-$zipname = date(DATE_ATOM,$t).".zip";
+$zipname = $url.".zip";
 $tmp_file = tempnam(sys_get_temp_dir(),"zip");
 
 $zip = new ZipArchive();
@@ -82,6 +112,7 @@ function get_download_file($url, $file_name, $file_size){
 
 	
 	$new_size = 128 + $file_size;
+
 
 	ini_set('memory_limit',strval($new_size).'M');
 	
