@@ -46,12 +46,23 @@
 		  color: black;
 		  background-color: #f1f1f1;
 		}
+		#errorlanguage {
+		  color: #DC2700;
+		}
+		#errordate {
+		  color: #DC2700;
+		}
 	</style>
 
 	<script type="text/javascript">
 		//function to get the languages available for the source selected by the user
 		//executed every time user changes the dropdown selection for date
 		$(document).ready(function(){
+			
+			//Hide dropdown for language and date to force user to pick source
+			$("#languages").hide();
+			$("#dates").hide();
+			
 			$('input[type=radio][name=sources]').change(function(){
 				var source = this.value;
 				console.log(source);
@@ -63,6 +74,9 @@
 						$("#languages").html(data);
 					} 
 				});
+				//Show languge dropdown menu after picking source
+				$("#languages").show();
+				$("#dates").hide();
 			});
 		});
 
@@ -83,6 +97,8 @@
 						$("#dates").html(data);
 					} 
 				});
+				//Show date dropdown menu after picking source
+				$("#dates").show();
 			});
 		});
 		
@@ -107,43 +123,6 @@
 			
 		}
 		
-		/*
-		var SourceUrl = "https://dumps.wikimedia.org/";
-		var queryUrl = "";
-		var landingUrl = "";
-		var source = "";
-		var langsource = "";
-		$(function() {
-			
-			 $('#languages').on('change', function(){
-				if($(this).val() == 0){
-					queryUrl = "";
-				}else{
-					queryUrl = $(this).val();
-					source = $('input[type=radio][name=sources]:checked').val();
-					langsource = queryUrl + source;
-				}
-				MakeUrl();
-				return false;
-			 });
-			 
-			 $('#dates').on('change', function(){
-				if($(this).val() == 0){
-					landingUrl = "";
-				}else{
-					landingUrl = $(this).val();
-				}
-				MakeUrl();
-				return false;
-			 });
-		});
-		
-		function MakeUrl(){
-			var finalUrl = SourceUrl + langsource + "/" + landingUrl + "/";
-			$('#urlBox').val(finalUrl);
-		} */
-		
-		//action="get_download_link.php" 
 	</script>
 	
 	<body>
@@ -153,16 +132,16 @@
 
 			<!-- Header -->
 			<header class="w3-container w3-xlarge w3-padding-24">
-				<h1 style="font-family:Brush Script Std" align="center"> Wiki Web Downloader</h1>
+				<h1 style="font-family:Brush Script Std" align="center">Wiki Web Downloader</h1>
 			</header>
 
 			<div class="w3-row" style="padding: 0 20px 10px 20px">
 				<form id="form" method="post">
 				
 					<div class="row" style="padding-top:30px">
-						<div class="col-sm-4" align="center" style="font-family:Impact; font-size:140%">Choose Source</div>
-						<div class="col-sm-3" align="center" style="font-family:Impact; font-size:140%">Choose Language</div>
-						<div class="col-sm-3" align="center" style="font-family:Impact; font-size:140%">Choose Date</div> 
+						<div class="col-sm-4" align="center" style="font-family:Impact; font-size:140%">Step 1 : Choose Source</div>
+						<div class="col-sm-3" align="center" style="font-family:Impact; font-size:140%">Step 2 : Choose Language</div>
+						<div class="col-sm-3" align="center" style="font-family:Impact; font-size:140%">Step 3 : Choose Date</div> 
 						<div class="col-sm-2"></div> 
 					</div>
 					
@@ -192,19 +171,46 @@
 						
 						<div class="col-sm-3" align="center">
 							<select name="languages" id="languages">
-								<option selected disabled>-select language-</option>
+								<option value = 0 >-select a language-</option>
+								<option value = 0 disabled>Wait for the dropdown to refresh</option>
 							</select>
+							<br><p id="errorlanguage"></p>
 						</div>
 						
 						<div class="col-sm-3" align="center">
 							<select name="dates" id="dates">
-								<option selected disabled>-select date-</option>
+								<option value = 0>-select a date-</option>
+								<option value = 0 disabled>Wait for the dropdown to refresh</option>
 							</select>
+							<br><p id="errordate"></p>
 						</div>
 						
 						<div class="col-sm-2" align="center">
 							<submit>
-								<input type="button" name="submit" onclick="urlFunction()" value="Submit">
+								<!--<input type="button" name="submit" onclick="urlFunction()" value="Submit">-->
+								<input type="button" name="submit" value="Submit" onclick="check()">
+								<script type="text/javascript">
+								function check()
+								{
+									//Clear error messages
+									//document.getElementById('errorlanguage').innerHTML = "";
+									document.getElementById('errordate').innerHTML = "";
+									document.getElementById('errorlanguage').innerHTML = "";
+									
+									//Check if user fill all inputs
+									if(document.getElementById('languages').value == 0)
+									{
+										document.getElementById('errorlanguage').innerHTML = "No language selected";
+									}
+									if(document.getElementById('dates').value == 0)
+									{
+										document.getElementById('errordate').innerHTML = "No date selected";
+									}
+									if(document.getElementById('dates').value != 0 &&  document.getElementById('languages').value != 0){
+										//Put download function call here
+									}
+								}
+								</script>
 							</submit>
 						</div>
 					 </div>

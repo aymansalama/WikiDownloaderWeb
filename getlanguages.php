@@ -100,8 +100,8 @@
 	//find the code that matches from dump file with wiki available code
 	$results=array_intersect($codeArray,$langarray);
 	
-	echo "<option value='null' selected disabled>-select a language-</option>";
-	
+	echo "<option value = 0 selected disabled>-select a language-</option>";
+	echo "<option value = 1>-select a date-</option>";
 	//show the language in the dropdown based on available code
 	foreach($results as $result){
 		for($i=0; $i<$count2D; $i++){
