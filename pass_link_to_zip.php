@@ -14,13 +14,16 @@ $fileArray = array();
 
 
 if(isset($_POST['submit'])){
+	
 	if(!empty($_POST['match_values_2'])){
+		//print_r($_POST['match_values_2']);
 		foreach($_POST['match_values_2'] as $filearray){
-		
 			$single = explode(",",$filearray);
 			foreach($single as $item){
 				$array[] = explode(" ",$item);
+		
 			}
+			
 		}
 		//convert size unit into Megabytes
 		foreach ($array as $arr){
@@ -39,21 +42,27 @@ if(isset($_POST['submit'])){
 			array_push($sizeArray,$size);
 		}
 	}
-
+	
 	//Download multiple files
-	if(!empty($_POST['match_values'])){
-		for($i = 0; $i < count($_POST['match_values']); $i++){
-			$selected = $_POST['match_values'][$i];
+	
+	if(!empty($_POST['match_values_1'])){
+		//print_r($_POST['match_values_1']);
+		for($i = 0; $i < count($_POST['match_values_1']); $i++){
+			$selected = $_POST['match_values_1'][$i];
 			$URL = $url.$selected;
 			$file = get_download_file($URL, $selected, $sizeArray[$i]);
 			array_push($selectedArray, $selected);
 			array_push($fileArray, $file);
 		}
+		
 	}
+	
+	
+
 }
 
-print_r($file);
- 
+//print_r($file);
+
 //Zip files
 $t = time();
 $zipname = $url.".zip";
@@ -106,18 +115,18 @@ function get_download_file($url, $file_name, $file_size){
 	//Set memory limit allowed
 	$memory = ini_get('memory_limit');
 	
-	/*
+	
 	//bytes to Mb
 	$memory_use_inMB = memory_get_usage()/1024/1024;
-	$new_size = 128 + $file_size + memory_use_inMB;*/
+	$new_size = 128 + $file_size + $memory_use_inMB;
 	
-	ini_set('memory_limit','-1');
+	ini_set('memory_limit', -1);
 	
 	$result = curl_exec($ch);
 	curl_close($ch);
 	file_put_contents($output_filename, $result); 
 	
-	ini_set('memory_limit', $memory_limit);
+	ini_set('memory_limit', $memory);
 	
 	return($output_filename);
 }
