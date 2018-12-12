@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<style>
-		#urlBox2 {
-			width:500px;
-		}
+		
 		input[type=checkbox]
 		{
 		  /* Double-sized Checkboxes */
@@ -18,23 +16,54 @@
 		{
 		  margin: 50px;
 		}
+		#downloadbutton {
+			  display: inline-block;
+			  padding: 10px 20px;
+			  font-size: 24px;
+			  cursor: pointer;
+			  text-align: center;
+			  text-decoration: none;
+			  outline: none;
+			  color: #fff;
+			  background-color: #4da6ff;
+			  border: none;
+			  border-radius: 15px;
+			  box-shadow: 0 9px #999;
+		}
+
+		#downloadbutton:hover {background-color: #0066cc}
+
+		#downloadbutton:active {
+			  background-color: #0066cc;
+			  box-shadow: 0 5px #666;
+			  transform: translateY(4px);
+		}
 	</style>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script>	
-			$(document).ready(function(){
-				var x = document.getElementById("check");
-				if (x.style.display === "none") {
-					x.style.display = "block";
+		<script>
+		
+			
+			//unable for submission when no input selection
+			$(document).ready(function() {
+				var items = $(".itemChk");
+
+				items.click(function() {
+					if ($(this).is(":checked")) {
+						$("#downloadbutton").removeAttr("disabled");
+					} else {
+						$("#downloadbutton").attr("disabled", "disabled");
+					}
+					
+				});
+			}); 
+			
+			//uncheck all previous selection for checkbox values when submission done
+			function uncheckAll() {
+			$("input[type='checkbox']:checked").prop("checked", false)
 				}
-				$('.check:button').toggle(function(){
-					$('input:checkbox').attr('checked','checked');
-					$(this).val('uncheck all')
-				},function(){
-					$('input:checkbox').removeAttr('checked');
-					$(this).val('check all');        
-				})
-			})
+			$(':submit').on('click', uncheckAll)
+			
 		</script>
 	</head>
 	<body>
@@ -77,7 +106,7 @@
 					
 					foreach ($matches as $match) {
 					
-						echo('<form action="pass_link_to_zip.php" method="post"><input id= "checked" type="checkbox" name="link" value="'.$match[0].'"> '.$match[0].'<br>');
+						echo('<form action="pass_link_to_zip.php" method="post"><input type="checkbox" class="itemChk" name="link" value="'.$match[0].'"> '.$match[0].'<br>');
 					
 					}
 				
@@ -85,12 +114,9 @@
 				}
 			}
 			
-			if(isset($_POST['submit'])){
-				$url= $_POST['urlBox'];
-				echo ('<input type="text" value="'.$url.'" id="urlBox2" name="urlBox2" readonly />');
-			}
-
-			echo('<input type="submit" name="Download" value="Download" /></form>');
+			
+			echo('<input type="submit" id="downloadbutton" name="submit" value="Download" disabled="disabled"/></form><br>');
+			
 
 		?>
 

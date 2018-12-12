@@ -78,6 +78,29 @@
 		#myBtn:hover {
 		  background-color: #555;
 		}
+		
+		.submitbutton {
+		  display: inline-block;
+		  padding: 10px 20px;
+		  font-size: 24px;
+		  cursor: pointer;
+		  text-align: center;
+		  text-decoration: none;
+		  outline: none;
+		  color: #fff;
+		  background-color: #4da6ff;
+		  border: none;
+		  border-radius: 15px;
+		  box-shadow: 0 9px #999;
+		}
+
+		.submitbutton:hover {background-color: #0066cc}
+
+		.submitbutton:active {
+		background-color: #0066cc;
+		box-shadow: 0 5px #666;
+		transform: translateY(4px);
+		}
 	</style>
 
 	<script type="text/javascript">
@@ -238,7 +261,7 @@
 						<div class="col-sm-2" align="center">
 							<submit>
 								<!--<input type="button" name="submit" onclick="urlFunction()" value="Submit">-->
-								<input type="button" name="submit" value="Submit" onclick="check()">
+								<input type="button" class="submitbutton" name="submit" value="Submit" onclick="check()">
 								<script type="text/javascript">
 								function check()
 								{
