@@ -16,7 +16,6 @@ $fileArray = array();
 if(isset($_POST['submit'])){
 	
 	if(!empty($_POST['match_values_2'])){
-		//print_r($_POST['match_values_2']);
 		foreach($_POST['match_values_2'] as $filearray){
 			$single = explode(",",$filearray);
 			foreach($single as $item){
@@ -58,10 +57,12 @@ if(isset($_POST['submit'])){
 	}
 	
 	
+	
+	
 
 }
 
-//print_r($file);
+
 
 //Zip files
 $t = time();
