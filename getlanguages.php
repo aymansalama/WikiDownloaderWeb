@@ -68,30 +68,40 @@
 
 	//for each element in <tr> tag, get the language and code only
 	foreach ($tags as $tag) {
+
+		$tagString = "";
+
+		foreach($tag->childNodes as $td){
+			if($td->nodeName =="td"){
+				$tagString = $tagString.$td->nodeValue." ";
+			}
+		}
 		
 		//getting the content in the table 
-		if(preg_match("/^[a-z]/", $tag->nodeValue )){
+		if(!(ctype_upper(substr($tagString, 0, 1))) ){
 			
 			// split the phrase by any number of commas or space characters,
 			// which include " ", \r, \t, \n and \f
-			$code = preg_split("/[\s,]+/", $tag->nodeValue);
+			$code = preg_split("/[\s,]+/", $tagString);
 			
-			//Find the position of the first occurrence of 'ltr' & 'rtl' and 
-			//get the string between code and 'ltr'/'rtl' and save as language
-			if(strpos($tag->nodeValue, 'ltr'))
-				$language = get_string_between($tag->nodeValue, $code[0], 'ltr');
-			else
-				$language = get_string_between($tag->nodeValue, $code[0], 'rtl');
-			
-			//replace the '-' with '_' to match the code get from https://dumps.wikimedia.org/backup-index.html
-			if(strpos($code[0], '-'))
-				$code[0] = str_replace("-","_",$code[0]);
-			
-			//store language and code into array 
-			$codeArray[$count2D] = $code[0];
-			$langArray[$count2D] = array($code[0], $language);
-			
-			$count2D++;
+			if($code[0]){
+				//Find the position of the first occurrence of 'ltr' & 'rtl' and 
+				//get the string between code and 'ltr'/'rtl' and save as language
+				if(strpos($tag->nodeValue, 'ltr'))
+					$language = get_string_between($tagString, $code[0], 'ltr');
+				else
+					$language = get_string_between($tagString, $code[0], 'rtl');
+				
+				//replace the '-' with '_' to match the code get from https://dumps.wikimedia.org/backup-index.html
+				if(strpos($code[0], '-'))
+					$code[0] = str_replace("-","_",$code[0]);
+				
+				//store language and code into array 
+				$codeArray[$count2D] = $code[0];
+				$langArray[$count2D] = array($code[0], $language);
+				
+				$count2D++;
+			}
 		}
 	}
 	
